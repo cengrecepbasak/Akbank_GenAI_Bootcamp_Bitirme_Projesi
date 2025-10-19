@@ -1,0 +1,56 @@
+Finans ve Bankacılık
+Finans, bireylerin, işletmelerin ve devletlerin para kaynaklarını yönetme sürecidir. Bankacılık ise finansal hizmetler sunan kurumların faaliyetlerini kapsar.
+
+Akbank Hakkında
+Akbank, Türkiye'nin önde gelen özel bankalarından biridir. 1948 yılında kurulmuştur ve müşterilerine bireysel bankacılık, ticari bankacılık ve kurumsal bankacılık hizmetleri sunar.
+
+Yapay Zeka ve Makine Öğrenmesi
+Yapay zeka, bilgisayar sistemlerinin insan zekasını taklit eden yetenekler kazanmasıdır. Makine öğrenmesi ise yapay zekanın bir alt dalı olup, bilgisayarların veriden öğrenmesini sağlar.
+
+Veri Bilimi
+Veri bilimi, yapılandırılmış ve yapılandırılmamış verilerden bilgi ve öngörü elde etmek için bilimsel yöntemler, süreçler, algoritmalar ve sistemler kullanır.
+
+Blockchain Teknolojisi
+Blockchain, merkezi olmayan, dağıtılmış bir dijital defter teknolojisidir. İşlem kayıtlarının güvenli ve şeffaf şekilde tutulmasını sağlar.
+
+Python Programlama
+Python, yapay zeka, veri bilimi ve web geliştirme projelerinde yaygın olarak kullanılan yüksek seviyeli bir programlama dilidir. Sade sözdizimi ve geniş kütüphane ekosistemi ile bilinir.
+
+Kredi Türleri
+Bireysel kredi, konut kredisi, taşıt kredisi ve işletme kredisi bankaların sunduğu başlıca kredi türleridir. Her kredi türünün farklı faiz oranları ve geri ödeme koşulları bulunur.
+
+Tasarruf Ürünleri
+Bankalar müşterilerine vadeli hesap, vadesiz hesap, altın hesabı ve döviz hesabı gibi çeşitli tasarruf ürünleri sunar. Bu ürünler müşterilerin paralarını değerlendirmelerine olanak tanır.
+
+Dijital Bankacılık
+Mobil bankacılık ve internet bankacılığı, müşterilerin bankacılık işlemlerini fiziksel şubeye gitmeden dijital platformlardan gerçekleştirmesine olanak tanır.
+
+Yatırım Araçları
+Hisse senedi, tahvil, bono, yatırım fonları ve emtialar başlıca yatırım araçlarıdır. Her yatırım aracının risk ve getiri profili farklılık gösterir.
+
+Finansal Okuryazarlık
+Bireylerin finansal ürünleri ve kavramları anlama, değerlendirme ve etkin şekilde kullanma becerisidir. Doğru finansal kararlar almak için önemlidir.
+
+Chatbot Teknolojileri
+Chatbot'lar, doğal dil işleme ve makine öğrenmesi teknolojilerini kullanarak kullanıcılarla insan benzeri konuşmalar yapabilen yazılımlardır.
+
+RAG Mimarisi
+Retrieval Augmented Generation, dil modellerinin harici bilgi kaynaklarına erişimini sağlayarak daha doğru ve güncel cevaplar üretmesine olanak tanır.
+
+API Entegrasyonu
+Uygulama programlama arayüzleri, farklı yazılım sistemlerinin birbiriyle iletişim kurmasını ve veri paylaşmasını sağlar.
+
+Bulut Bilişim
+Bulut bilişim, bilgi işlem kaynaklarının internet üzerinden talep üzerine sağlanmasıdır. Ölçeklenebilirlik ve maliyet etkinliği sağlar.
+
+Fintech
+Finansal teknoloji, finansal hizmetlerin teknoloji kullanılarak iyileştirilmesi ve otomatikleştirilmesidir. Dijital ödemeler, blockchain ve yapay zeka uygulamalarını kapsar.
+
+Müşteri Deneyimi
+Bankacılık sektöründe müşteri deneyimi, müşterilerin bankayla olan tüm etkileşimleri boyunca edindikleri izlenimler ve duygulardır.
+
+Risk Yönetimi
+Finansal kurumlarda risk yönetimi, kredi riski, piyasa riski, operasyonel risk gibi çeşitli risk türlerinin tanımlanması, ölçülmesi ve kontrol altına alınması sürecidir.
+
+Regülasyon ve Uyum
+Bankacılık sektörü, BDDK ve TCMB gibi düzenleyici kurumlar tarafından denetlenir ve finansal istikrarın sağlanması için çeşitli düzenlemelere tabidir.

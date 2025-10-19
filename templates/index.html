@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wikipedia RAG Chatbot</title>
+    <style>
+        /* CSS Reset - tüm tarayıcı varsayılan stillerini sıfırlar */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* Ana sayfa stil ayarları */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        /* Ana konteyner - sohbet arayüzünü içerir */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        /* Üst başlık bölümü */
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        
+        .header p {
+            opacity: 0.8;
+            font-size: 14px;
+        }
+        
+        /* Sohbet konteyneri - mesajları ve input alanını içerir */
+        .chat-container {
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Mesajların görüntülendiği kaydırılabilir alan */
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #f8f9fa;
+        }
+        
+        /* Bireysel mesaj balonları */
+        .message {
+            margin: 10px 0;
+            padding: 12px 16px;
+            border-radius: 18px;
+            max-width: 80%;
+            line-height: 1.4;
+            animation: fadeIn 0.3s ease-in;
+        }
+        
+        /* Mesajların yumuşak geçişle görünmesini sağlayan animasyon */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Kullanıcı mesajları için stil (sağda görünür) */
+        .user-message {
+            background: #007bff;
+            color: white;
+            margin-left: auto;
+            border-bottom-right-radius: 5px;
+        }
+        
+        /* Bot mesajları için stil (solda görünür) */
+        .bot-message {
+            background: white;
+            border: 1px solid #e0e0e0;
+            margin-right: auto;
+            border-bottom-left-radius: 5px;
+        }
+        
+        /* Kullanıcı giriş alanı */
+        .input-area {
+            padding: 20px;
+            border-top: 1px solid #e0e0e0;
+            background: white;
+        }
+        
+        /* Giriş grubu - input ve butonu yan yana yerleştirir */
+        .input-group {
+            display: flex;
+            gap: 10px;
+        }
+        
+        /* Metin giriş kutusu */
+        input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            outline: none;
+            font-size: 14px;
+        }
+        
+        input:focus {
+            border-color: #007bff;
+        }
+        
+        /* Gönder butonu */
+        button {
+            padding: 12px 24px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+        
+        button:hover {
+            background: #0056b3;
+        }
+        
+        /* Bot yazıyor göstergesi - varsayılan olarak gizli */
+        .typing-indicator {
+            display: none;
+            padding: 12px 16px;
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 18px;
+            margin-right: auto;
+            border-bottom-left-radius: 5px;
+            max-width: 80px;
+        }
+        
+        /* Yazma animasyonu için noktaların konteyneri */
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+        }
+        
+        /* Yazma animasyonu noktaları */
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: #999;
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+        
+        /* Noktaların animasyon gecikmeleri */
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+        
+        /* Yazma animasyonu */
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-5px); }
+        }
+        
+        /* Sistem durum bilgisi */
+        .status {
+            text-align: center;
+            padding: 10px;
+            font-size: 12px;
+            color: #666;
+            background: #f8f9fa;
+            border-top: 1px solid #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Ana uygulama konteyneri -->
+    <div class="container">
+        <!-- Üst başlık bölümü -->
+        <div class="header">
+            <h1>🤖 Wikipedia RAG Chatbot</h1>
+            <p>Akbank GenAI Bootcamp - Wikipedia Tabanlı RAG Sistemi</p>
+        </div>
+        
+        <!-- Sohbet mesajlarının ve yazma göstergesinin bulunduğu alan -->
+        <div class="chat-container">
+            <!-- Mesajların görüntülendiği kaydırılabilir alan -->
+            <div class="chat-messages" id="chatMessages">
+                <!-- Botun açılış mesajı -->
+                <div class="message bot-message">
+                    👋 Merhaba! Ben Wikipedia tabanlı bir chatbot'um. Size her türlü konuda bilgi verebilirim. Ne öğrenmek istiyorsunuz?
+                </div>
+            </div>
+            
+            <!-- Bot yazıyor göstergesi - başlangıçta gizli -->
+            <div class="typing-indicator" id="typingIndicator">
+                <div class="typing-dots">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Kullanıcı giriş alanı -->
+        <div class="input-area">
+            <div class="input-group">
+                <!-- Kullanıcı mesaj giriş kutusu -->
+                <input type="text" id="userInput" placeholder="Sorunuzu yazın..." onkeypress="handleKeyPress(event)">
+                <!-- Mesaj gönderme butonu -->
+                <button onclick="sendMessage()">Gönder</button>
+            </div>
+        </div>
+        
+        <!-- Sistem durum bilgisi -->
+        <div class="status" id="status">
+            ✅ Sistem çalışıyor - Gemini API: <span id="apiStatus">Bağlanıyor...</span>
+        </div>
+    </div>
+
+    <script>
+        // Yeni mesaj ekleme fonksiyonu
+        function addMessage(message, isUser) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+            messageDiv.textContent = message;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        // Klavye girişini işleme (Enter tuşu ile gönderme)
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+        
+        // Yazma göstergesini görünür yapma
+        function showTyping() {
+            document.getElementById('typingIndicator').style.display = 'block';
+            document.getElementById('chatMessages').scrollTop = document.getElementById('chatMessages').scrollHeight;
+        }
+        
+        // Yazma göstergesini gizleme
+        function hideTyping() {
+            document.getElementById('typingIndicator').style.display = 'none';
+        }
+        
+        // Mesaj gönderme fonksiyonu
+        function sendMessage() {
+            const input = document.getElementById('userInput');
+            const message = input.value.trim();
+            
+            if (message) {
+                addMessage(message, true);
+                input.value = '';
+                
+                showTyping();
+                
+                // Backend API'ye istek gönderme
+                fetch('/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({message: message})
+                })
+                .then(response => response.json())
+                .then(data => {
+                    hideTyping();
+                    addMessage(data.response, false);
+                })
+                .catch(error => {
+                    hideTyping();
+                    addMessage('Üzgünüm, bir hata oluştu. Lütfen daha sonra tekrar deneyin.', false);
+                });
+            }
+        }
+        
+        // API durumunu kontrol etme
+        fetch('/health')
+            .then(response => response.json())
+            .then(data => {
+                const statusElement = document.getElementById('apiStatus');
+                if (data.gemini_configured) {
+                    statusElement.textContent = '✅ Bağlı';
+                    statusElement.style.color = 'green';
+                } else {
+                    statusElement.textContent = '⚠️ API Key Yok';
+                    statusElement.style.color = 'orange';
+                }
+            });
+    </script>
+</body>
+</html>
