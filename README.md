@@ -6,6 +6,23 @@
 *Not: Görsel "Atatürk kimdir?" ve "Python nedir?" sorularına verilen cevapları gösteriyor.*
 
 ---
+## 📂 Proje Klasör Yapısı
+
+rag-chatbot
+│
+├── app.py # Flask uygulama ana dosyası
+├── requirements.txt # Python bağımlılıkları
+├── README.md # Proje açıklamaları ve kullanım rehberi
+├── .gitignore 
+├── .gitattributes # Git dosya ayarları
+├── data/ # Örnek veri dosyaları
+│ └── sample_data.txt # Örnek soru-cevap veya doküman
+├── static/ # Uygulama görseli
+│ └── interface.png # Arayüz görseli
+├── templates/ # HTML şablonları
+│ └── index.html # Ana sayfa şablonu
+
+---
 
 ## 1. Projenin Amacı
 Bu proje, Türkçe Wikipedia makalelerini temel alarak geliştirilmiş bir **RAG (Retrieval-Augmented Generation) Chatbot** uygulamasıdır. Amaç, kullanıcıların sorularına hızlı ve doğru cevaplar verebilen bir sistem geliştirmektir. Proje özellikle:
