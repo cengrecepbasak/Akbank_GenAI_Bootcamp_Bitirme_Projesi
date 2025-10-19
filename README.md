@@ -128,6 +128,8 @@ python app.py
 4. Eğer API başarısız olursa fallback sistemi devreye girer
 5. Cevap ve kaynak dokümanlar kullanıcıya gösterilir
 
+- Not: app.py ve index.html dosyaları içerisinde kod bloglarının görevleri ve teknik açıklamaları yorum satırları içerisinde detaylı bir şekilde açıklanmıştır.
+
 ```
 Kullanıcı → Frontend → Flask API → Retrieval → Generation → Yanıt
 ```
