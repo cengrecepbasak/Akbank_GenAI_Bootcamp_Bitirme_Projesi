@@ -205,15 +205,6 @@ Kodda klasik RAG adımları şöyle yer alıyor:
 
 ---
 
-## 8. Proje Linki
-
-🌐 [Wikipedia RAG Chatbot - Localhost](http://localhost:5000)
-- Arayüze ulaşmak için linke tıklayınız. 
-- Ardından açılan ekranda "Sorunuzu yazın..." kısmında sorunuzu belirterek "Gönder" butonuna tıklayınız.
-- Chatbot size yanıtları verecektir.
-
----
-
 ## Önemli Not
 - Bu proje, Google Gemini Generative AI kullanmaktadır. Çalışabilmesi için .env dosyasına API anahtarını eklemeniz gerekmektedir. 
 - Proje dizininde .env dosyası oluşturun.
